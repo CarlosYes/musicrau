@@ -1,0 +1,167 @@
+ <!DOCTYPE html>
+<html lang=pt-PT>
+<head>
+<title>Radio Amigos Unidos</title>
+<meta name="description" content="RAU" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv=X-UA-Compatible content="IE=Edge"/>
+<meta property="og:title" content="RAU Player" />
+<meta property="og:description" content="RAU" />
+<link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="48x48" />
+<link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="144x144" />
+<link rel="icon" type="image/png" href="https://i.imgur.com/nNh98kV.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://i.imgur.com/nNh98kV.png" sizes="180x180"/>
+</head>
+<style>
+body {
+  margin: 0;
+  background: #5D478B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.container {
+  position: relative;
+  width: 1308px;
+  height: 486px;
+}
+
+/* Video lateral */
+.video-wrapper {
+  position: absolute;
+  width: 290px;
+  height: 510px;
+  overflow: hidden;
+  border-radius: 12px;
+  z-index: 0;
+}
+video.side-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.left-video-wrapper { left: -25px; top: 0; }
+.right-video-wrapper { right: -45px; top: 0; }
+
+/* Imagem central */
+.center-video {
+  position: absolute;
+  top: 0;
+  left: 310px; /* posição central */
+  width: 708px; /* espaço entre os 2 videos */
+  height: 510px;
+  border-radius: 22px;
+  opacity: 0;
+  animation: fadeOpacity 30s ease-in-out infinite, glow 5s ease-in-out infinite alternate;
+  box-shadow: 0 0 0px #00ffff;
+}
+
+/* Fade in/out */
+@keyframes fadeOpacity {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }   /* fade in 5s */
+  75%  { opacity: 1; }   /* rimane visibile 10s */
+  100% { opacity: 0; }   /* fade out 5s */
+}
+
+/* neon */
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+  50% { box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff; }
+  100% { box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+}
+
+/* video lateral */
+.video-text {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #0088ff;
+  white-space: nowrap;
+  z-index: 0;
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Video Esquerdo -->
+  <div class="video-wrapper left-video-wrapper">
+    <video class="side-video" autoplay loop muted playsinline>
+      <source src="https://i.imgur.com/piUfgSL.mp4" type="video/mp4">
+	  seu navegador não suporta o vídeo
+    </video>
+    <div class="video-text">Rádio Dos Amigos Unidos</div>
+  </div>
+
+  <!-- Video direito -->
+  <div class="video-wrapper right-video-wrapper">
+    <video class="side-video" autoplay loop muted playsinline>
+      <source src="https://i.imgur.com/I58n1m4.mp4" type="video/mp4">
+	  seu navegador não suporta o vídeo
+    </video>
+    <div class="video-text">Rádio Dos Amigos Unidos</div>
+  </div>
+
+  <!-- Imagem central -->
+  <video autoplay muted loop class="center-video" src="https://i.imgur.com/g44tkDO.mp4" type="video/mp4"</video>
+
+<script>
+
+    var message = "©arlos Copyright";
+
+    function clickIE4() {
+        if (event.button == 2) {
+            alert(message);
+            return false;
+        }
+    }
+
+    function clickNS4(e) {
+        if (document.layers || document.getElementById && !document.all) {
+            if (e.which == 2 || e.which == 3) {
+                alert(message);
+                return false;
+            }
+        }
+    }
+
+    if (document.layers) {
+        document.captureEvents(Event.MOUSEDOWN);
+        document.onmousedown = clickNS4;
+    } else if (document.all && !document.getElementById) {
+        document.onmousedown = clickIE4;
+    }
+
+    document.oncontextmenu = new Function("alert(message);return false")
+</script>
+<script>
+
+    function disableselect(e) {
+        return false
+    }
+    function reEnable() {
+        return true
+    }
+    document.onselectstart = new Function("return false")
+    if (window.sidebar) {
+        document.onmousedown = disableselect
+        document.onclick = reEnable
+    }
+</script>
+<script>
+        window.oncontextmenu = function () {
+            console.log("Right Click Disabled");
+            return false;
+        }
+    </script> 
+</div>
+</body>
+</html>
